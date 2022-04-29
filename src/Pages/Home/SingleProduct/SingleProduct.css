@@ -1,0 +1,14 @@
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    height: 300px;
+    object-fit: cover;
+    width: 80%;
+
+}
+
+.product-content button:hover {
+    background-color: #14279B;
+}

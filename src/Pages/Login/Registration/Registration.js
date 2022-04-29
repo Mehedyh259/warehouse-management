@@ -3,7 +3,11 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
+
 const Registration = () => {
+
+
+
     const navigate = useNavigate();
     const handleSubmit = (event) => {
 

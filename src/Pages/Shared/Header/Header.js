@@ -3,12 +3,22 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../images/mediqas.png';
 import './Header.css';
+import { signOut } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+
+
+
 
 const Header = () => {
+
+    const [user] = useAuthState(auth);
+    const handleSignOut = () => {
+        signOut(auth);
+    }
+
     return (
         <>
-
-
             <Navbar collapseOnSelect expand="lg" sticky='top' bg="light" variant="light shadow">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
@@ -23,19 +33,29 @@ const Header = () => {
                             <NavLink className={({ isActive }) =>
                                 isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
                             } to="/blog"> Blog </NavLink>
-                            <NavLink className={({ isActive }) =>
-                                isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
-                            } to="/manage-inventory"> Manage Inventory </NavLink>
-                            <NavLink className={({ isActive }) =>
-                                isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
-                            } to="/my-products"> My Products </NavLink>
 
-                            <NavLink className={({ isActive }) =>
-                                isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
-                            } to="/register"> Register </NavLink>
-                            <NavLink className={({ isActive }) =>
-                                isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
-                            } to="/login"> Login </NavLink>
+                            {
+                                user ?
+                                    <>
+                                        <NavLink className={({ isActive }) =>
+                                            isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                                        } to="/manage-inventory"> Manage Inventory </NavLink>
+                                        <NavLink className={({ isActive }) =>
+                                            isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                                        } to="/my-products"> My Products </NavLink>
+                                        <button className='btn ms-3 btn-link text-dark text-decoration-none' onClick={handleSignOut}>Sign out</button>
+                                    </>
+                                    :
+                                    <>
+                                        <NavLink className={({ isActive }) =>
+                                            isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                                        } to="/register"> Register </NavLink>
+                                        <NavLink className={({ isActive }) =>
+                                            isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                                        } to="/login"> Login </NavLink>
+                                    </>
+                            }
+
 
                         </Nav>
 
