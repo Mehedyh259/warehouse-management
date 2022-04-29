@@ -9,7 +9,6 @@ const Inventory = () => {
         axios.get("http://localhost:5000/products?limit=6")
             .then(res => {
                 setProducts(res.data);
-                console.log(res.data)
             })
     }, [])
     return (

@@ -1,5 +1,5 @@
 .banner-area {
-    height: 70vh;
+    height: 450px;
     background-image: url("../../../images/banner.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -20,8 +20,6 @@
     content: '';
     background-color: #000;
     opacity: 0.6;
-
-
 }
 
 .banner-text {
