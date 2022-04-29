@@ -1,5 +1,4 @@
-import { async } from '@firebase/util';
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';

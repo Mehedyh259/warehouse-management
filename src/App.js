@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import AddInventory from './Pages/AddInventory/AddInventory';
 import Blog from './Pages/Blog/Blog';
@@ -8,6 +9,7 @@ import Home from './Pages/Home/Home/Home';
 import AuthRequire from './Pages/Login/AuthRequire/AuthRequire';
 import Login from './Pages/Login/Login/Login';
 import Registration from './Pages/Login/Registration/Registration';
+import ResetPassword from './Pages/Login/ResetPassword/ResetPassword';
 import ManageInventory from './Pages/ManageInventory/ManageInventory';
 import MyProducts from './Pages/MyProducts/MyProducts';
 import Product from './Pages/Product/Product';
@@ -44,6 +46,7 @@ function App() {
         } />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Registration />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
 
 
 

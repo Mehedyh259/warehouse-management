@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -30,9 +30,6 @@ const Login = () => {
     }
     if (error) {
         errorMessage = <p className="text-danger">{error?.message}</p>;
-    }
-    const handleResetPassword = () => {
-        console.log('reset password');
     }
     if (user) {
         navigate(from, { replace: true });
@@ -63,8 +60,7 @@ const Login = () => {
                     <SocialLogin />
 
                     <p>Don't have an account? <span style={{ cursor: 'pointer' }} onClick={() => navigate('/register')} className='title-color'>Please Register</span></p>
-                    <p>Forget password? <span style={{ cursor: 'pointer' }}
-                        onClick={handleResetPassword} className='title-color'>Reset Password</span></p>
+                    <p>Forget password? <Link to="/reset-password" className='text-decoration-none title-color'>Reset Password Here.</Link></p>
                 </Col>
             </Row>
         </Container>
