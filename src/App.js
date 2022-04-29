@@ -2,8 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
+import AddInventory from './Pages/AddInventory/AddInventory';
 import Blog from './Pages/Blog/Blog';
 import Home from './Pages/Home/Home/Home';
+import AuthRequire from './Pages/Login/AuthRequire/AuthRequire';
 import Login from './Pages/Login/Login/Login';
 import Registration from './Pages/Login/Registration/Registration';
 import ManageInventory from './Pages/ManageInventory/ManageInventory';
@@ -20,9 +22,26 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/blog' element={<Blog />} />
-        <Route path='/manage-inventory' element={<ManageInventory />} />
-        <Route path='/my-products' element={<MyProducts />} />
-        <Route path='/product/:id' element={<Product />} />
+        <Route path='/add-inventory' element={
+          <AuthRequire>
+            <AddInventory />
+          </AuthRequire>
+        } />
+        <Route path='/manage-inventory' element={
+          <AuthRequire>
+            <ManageInventory />
+          </AuthRequire>
+        } />
+        <Route path='/my-products' element={
+          <AuthRequire>
+            <MyProducts />
+          </AuthRequire>
+        } />
+        <Route path='/inventory/:id' element={
+          <AuthRequire>
+            <Product />
+          </AuthRequire>
+        } />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Registration />} />
 

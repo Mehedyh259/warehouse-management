@@ -39,6 +39,9 @@ const Header = () => {
                                     <>
                                         <NavLink className={({ isActive }) =>
                                             isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                                        } to="/add-inventory"> Add Inventory </NavLink>
+                                        <NavLink className={({ isActive }) =>
+                                            isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
                                         } to="/manage-inventory"> Manage Inventory </NavLink>
                                         <NavLink className={({ isActive }) =>
                                             isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"

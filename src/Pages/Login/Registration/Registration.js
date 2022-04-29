@@ -10,7 +10,6 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Registration = () => {
     const navigate = useNavigate();
-    const [errorText, setErrorText] = useState('');
     const [
         createUserWithEmailAndPassword,
         user,
@@ -21,7 +20,6 @@ const Registration = () => {
     let errorMessage;
     if (error || updateError) {
         errorMessage = <p className="text-danger">{error?.message || updateError?.message}</p>;
-        setErrorText(errorMessage);
     }
     if (loading || updating) {
         return <Loading />
@@ -30,6 +28,7 @@ const Registration = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        errorMessage = "";
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -48,7 +47,7 @@ const Registration = () => {
                 <Col lg={6} md={8} sm={10} className="mx-auto shadow rounded p-3">
                     <h2 className='title-color text-center'>Please Register</h2>
                     {
-                        errorText ? errorText : ""
+                        errorMessage ? errorMessage : ""
                     }
                     <Form onSubmit={handleSubmit} className=''>
                         <Form.Group className="mb-3" controlId="formBasicName">
