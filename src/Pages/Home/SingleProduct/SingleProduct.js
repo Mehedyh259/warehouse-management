@@ -1,12 +1,15 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import './SingleProduct.css'
 
 const SingleProduct = ({ product }) => {
-    const nevigateManage = (id) => {
-
-    }
     const { _id, name, img, price, description, quantity, supplier } = product;
+    const navigate = useNavigate();
+
+    const nevigateManage = (id) => {
+        navigate(`/inventory/${id}`);
+    }
 
     return (
         <Col className='single-product my-2 shadow' sm={10} lg={4} md={6} >

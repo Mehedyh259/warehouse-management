@@ -6,11 +6,11 @@
 /*
 
 
-https://i.ibb.co/RPSPGCT/fexofenadine.jpg
-https://i.ibb.co/NrdHXXG/ciprocine.jpg
-https://i.ibb.co/8zQKRMN/azithromycin.jpg
-https://i.ibb.co/2ymRVrL/losectile.jpg
-https://i.ibb.co/XSd4Ly2/disprin.jpg
+
+
+
+
+
 
 
 */
