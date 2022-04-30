@@ -8,10 +8,12 @@ const Inventory = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get("http://localhost:5000/products?limit=6")
-            .then(res => {
-                setProducts(res.data);
-            })
+        const getProducts = async () => {
+            const { data } = await axios.get("http://localhost:5000/products?limit=6");
+            setProducts(data);
+        }
+        getProducts();
+
     }, [])
     return (
         <Container className='my-5'>

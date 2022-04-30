@@ -9,8 +9,12 @@ const Product = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/product/${id}`)
-            .then(res => setProduct(res.data))
+        const getProducts = async () => {
+            const { data } = await axios.get(`http://localhost:5000/product/${id}`);
+            setProduct(data);
+        }
+        getProducts();
+
     }, [id]);
 
     const handleDeliver = () => {
@@ -41,7 +45,7 @@ const Product = () => {
                 <Col lg={6} md={6} sm={10} className="mx-auto my-2">
                     <Card className='px-5 py-2 rounded shadow'>
                         <div className="text-center">
-                            <Card.Img className='card-image' variant="top" src={product?.img} />
+                            <Card.Img className='card-image w-50' variant="top" src={product?.img} />
                         </div>
                         <Card.Body>
                             <Card.Title className='title-color'>{product?.name}</Card.Title>
@@ -53,7 +57,7 @@ const Product = () => {
                             <Card.Text>
                                 {product.description}
                             </Card.Text>
-                            <Button onClick={handleDeliver} variant="outline-dark">Delivered</Button>
+                            <Button onClick={handleDeliver} variant="outline-dark hover-blue">Delivered</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -68,7 +72,7 @@ const Product = () => {
                             </Form.Group>
 
                             <Button className='bg-blue' variant=" d-block w-50 mx-auto mb-2" type="submit">
-                                Add Quantity
+                                Restock
                             </Button>
                         </Form>
                     </Card>

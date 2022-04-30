@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -18,12 +19,14 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        signInWithEmailAndPassword(email, password);
-
+        await signInWithEmailAndPassword(email, password);
+        const { data } = await axios.post('http://localhost:5000/login', { email });
+        localStorage.setItem('accessToken', data.accessToken);
+        navigate(from, { replace: true });
     }
     if (loading) {
         return <Loading />
@@ -31,9 +34,7 @@ const Login = () => {
     if (error) {
         errorMessage = <p className="text-danger">{error?.message}</p>;
     }
-    if (user) {
-        navigate(from, { replace: true });
-    }
+
 
     return (
         <Container className='my-5'>

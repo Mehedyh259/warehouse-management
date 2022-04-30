@@ -1,24 +1,42 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './ManageInventory.css'
 
 const ManageInventory = () => {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+
     useEffect(() => {
-        axios.get("http://localhost:5000/products")
-            .then(res => {
-                setProducts(res.data);
-            })
+        const getProducts = async () => {
+            const { data } = await axios.get("http://localhost:5000/products");
+            setProducts(data);
+        }
+        getProducts();
     }, []);
 
     const handleInventoryDelete = (id) => {
         const proceed = window.confirm("Are you sure you want to delete?");
-        console.log(proceed);
+
+        if (proceed) {
+            const newProducts = products.filter((product) => product._id !== id);
+            setProducts(newProducts);
+
+            axios.delete(`http://localhost:5000/product/${id}`)
+                .then(res => {
+                    if (res.status === 200) {
+                        toast.success("Product Deleted Successfully");
+                    }
+                })
+        }
     }
+
+
     return (
         <Container className='my-4'>
-            <button className="btn btn-lg bg-blue mb-3">Add New Item</button>
+            <button onClick={() => navigate('/add-inventory')} className="btn btn-lg bg-blue mb-3">Add New Item</button>
             <Row>
                 <Col md={12}>
                     <Table className='inventory-table' responsive bordered >
