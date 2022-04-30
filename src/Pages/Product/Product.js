@@ -38,7 +38,7 @@ const Product = () => {
     return (
         <Container className='my-3'>
             <Row>
-                <Col lg={6} md={6} sm={10} className="mx-auto">
+                <Col lg={6} md={6} sm={10} className="mx-auto my-2">
                     <Card className='px-5 py-2 rounded shadow'>
                         <div className="text-center">
                             <Card.Img className='card-image' variant="top" src={product?.img} />
@@ -48,17 +48,18 @@ const Product = () => {
                             <p className='text-primary'>{product?.supplier}</p>
                             <h5 className='fw-bold'>Price: ${product?.price}</h5>
                             <h5 className='fw-bold'>Quantity: {product?.quantity}</h5>
+                            <h6 className='fw-bold'>Sold: {product?.sold}</h6>
 
                             <Card.Text>
                                 {product.description}
                             </Card.Text>
-                            <Button onClick={handleDeliver} variant="outline-dark">Deliver One</Button>
+                            <Button onClick={handleDeliver} variant="outline-dark">Delivered</Button>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col lg={6} md={6} sm={10}>
+                <Col lg={6} md={6} sm={10} className="mx-auto my-2">
                     <Card className='p-3 rounded shadow'>
-                        <h2 className='title-color fw-bold text-center'>Increase Quantity</h2>
+                        <h2 className='title-color fw-bold text-center'>Restock The Item</h2>
 
                         <Form onSubmit={handleAddQuantity} >
                             <Form.Group className="mb-3" controlId="formBasicEmail">
