@@ -1,13 +1,16 @@
 .title-color {
-  color: #14279B !important;
+  /* color: #14279B !important; */
+  color: #15237e !important;
 }
 
 .bg-blue {
-  background-color: #14279B !important;
+  /* background-color: #1d2fa5 !important; */
+  background-color: #15237e !important;
   color: #fff !important;
 }
 
 .hover-blue:hover {
-  background-color: #14279B !important;
+  /* background-color: #14279B !important; */
+  background-color: #15237e !important;
   color: #fff !important;
 }

@@ -22,7 +22,7 @@ const SingleProduct = ({ product }) => {
                 <h5>Price: ${price}</h5>
                 <h5>Quantity: {quantity}</h5>
                 <p><small>{description}</small></p>
-                <button onClick={() => nevigateManage(_id)} className='btn btn-outline-dark rounded w-100 text-center'> Manage</button>
+                <button onClick={() => nevigateManage(_id)} className='btn btn-outline-dark hover-blue rounded w-100 text-center'> Manage</button>
             </div>
         </Col>
     );

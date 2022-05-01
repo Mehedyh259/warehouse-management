@@ -41,7 +41,7 @@ const Product = () => {
 
 
     return (
-        <Container className='my-3'>
+        <Container className='my-5'>
             <Row>
                 <Col lg={6} md={6} sm={10} className="mx-auto my-2">
                     <Card className='px-5 py-2 rounded shadow'>

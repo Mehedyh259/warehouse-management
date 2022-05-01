@@ -54,7 +54,7 @@ function App() {
 
       </Routes>
 
-      {/* <Footer /> */}
+      <Footer />
       {/* react toastify container */}
       <ToastContainer />
 
