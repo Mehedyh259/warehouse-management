@@ -70,7 +70,7 @@ const Blog = () => {
                     </p>
                 </Col>
                 <Col className="my-2" lg={6} md={6} sm={11}>
-                    <h3 className="title-color text-center mb-2">When should you use nodejs and when should you use mongodb?</h3>
+                    <h3 className="title-color mb-2">When should you use nodejs and when should you use mongodb?</h3>
                     <p className="p-3">
                         Nodejs is used to non-blocking event driven server creation. Basically realtime applications use nodejs like online games or chat applicaton.
                         It is used for website RestAPI creation. <br />

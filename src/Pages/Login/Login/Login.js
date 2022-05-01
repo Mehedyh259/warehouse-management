@@ -1,8 +1,10 @@
+import { async } from '@firebase/util';
 import axios from 'axios';
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -19,21 +21,28 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const setAccessToken = async (email) => {
+        toast.success("Logged In successfully")
+        navigate(from, { replace: true });
+        const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
+        localStorage.setItem('accessToken', data.accessToken);
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
-        localStorage.setItem('accessToken', data.accessToken);
-        navigate(from, { replace: true });
-
     }
     if (loading) {
         return <Loading />
     }
     if (error) {
         errorMessage = <p className="text-danger">{error?.message}</p>;
+    }
+
+    if (user) {
+        setAccessToken(user.email)
     }
 
 

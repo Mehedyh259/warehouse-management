@@ -61,7 +61,11 @@ const ManageInventory = () => {
                                     <td>{product?.price}</td>
                                     <td>{product?.quantity}</td>
                                     <td>{product?.sold}</td>
-                                    <td><button onClick={() => handleInventoryDelete(product._id)} className="btn btn-outline-danger btn-sm">Delete</button></td>
+                                    <td>
+                                        <button onClick={() => navigate(`/inventory/${product._id}`)} className="btn btn-outline-primary btn-sm me-2">Manage</button>
+                                        <button onClick={() => handleInventoryDelete(product._id)} className="btn btn-outline-danger btn-sm">Delete</button>
+
+                                    </td>
                                 </tr>)
                             }
 
