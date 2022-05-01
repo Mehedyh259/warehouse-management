@@ -15,34 +15,35 @@ const MyProducts = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        if (user.email) {
-            const getProducts = async () => {
+        const getProducts = async () => {
+            try {
 
-                try {
-                    const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
-                    const { data } = await axios.get(url, {
-                        headers: {
-                            authorization: localStorage.getItem('accessToken')
-                        }
-                    });
-                    setProducts(data);
-                } catch (err) {
-                    const status = err.response.status;
-                    if (status === 401 || status === 403) {
-                        signOut(auth);
-                        navigate('/login');
-                        localStorage.removeItem('accessToken')
-                        toast.error(err.response?.data?.message);
+                const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
+                const { data } = await axios.get(url, {
+                    headers: {
+                        authorization: localStorage.getItem('accessToken')
                     }
+                });
+                setProducts(data);
+            } catch (err) {
+                const status = err.response.status;
+                if (status === 401 || status === 403) {
+                    signOut(auth);
+                    navigate('/login');
+                    localStorage.removeItem('accessToken')
+                    toast.error(err.response?.data?.message);
                 }
             }
-            getProducts();
         }
+        getProducts();
     }, [user.email]);
 
     if (loading) {
         return <Loading />
     }
+
+
+
 
 
 

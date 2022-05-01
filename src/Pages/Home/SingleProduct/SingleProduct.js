@@ -13,7 +13,7 @@ const SingleProduct = ({ product }) => {
 
     return (
         <Col className='single-product my-2 shadow' sm={10} lg={4} md={6} >
-            <div className="image-container p-3">
+            <div className="image-container">
                 <img src={img} alt="" />
             </div>
             <div className="p-3 product-content">

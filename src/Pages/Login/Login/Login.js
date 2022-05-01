@@ -21,7 +21,9 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const setAccessToken = async (email) => {
+    const setAccessToken = async () => {
+        const email = user?.user?.email;
+
         toast.success("Logged In successfully")
         navigate(from, { replace: true });
         const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
@@ -42,7 +44,7 @@ const Login = () => {
     }
 
     if (user) {
-        setAccessToken(user.email)
+        setAccessToken();
     }
 
 

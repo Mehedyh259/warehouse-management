@@ -6,16 +6,44 @@ import { toast } from 'react-toastify';
 import './ManageInventory.css'
 
 const ManageInventory = () => {
+    // for counting how many page will be there
+    const [pageCount, setPageCount] = useState(0);
+    // this if for current page number
+    const [pageNumber, setPageNumber] = useState(0);
+    // this is for product limit
+    const [productLimit, setProductLimit] = useState(7);
+
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
 
+    // getting product count from database
+    useEffect(() => {
+
+        const getCount = async () => {
+            const { data } = await axios.get('https://tranquil-island-04777.herokuapp.com/productsCount');
+            const totalPages = Math.ceil(data.productsCount / productLimit);
+            setPageCount(totalPages);
+        }
+        getCount()
+
+    }, [productLimit])
+
+    // get products according to page number
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get("https://tranquil-island-04777.herokuapp.com/products");
+            // const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
+            const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
             setProducts(data);
         }
         getProducts();
-    }, []);
+    }, [pageNumber, productLimit]);
+
+    // changes to products count per page
+    const handlePageProductShowChange = (event) => {
+        const limit = Number(event.target.value);
+        setPageNumber(0);
+        setProductLimit(limit);
+    }
 
     const handleInventoryDelete = (id) => {
         const proceed = window.confirm("Are you sure you want to delete?");
@@ -34,9 +62,21 @@ const ManageInventory = () => {
     }
 
 
+
     return (
-        <Container className='my-4'>
-            <button onClick={() => navigate('/add-inventory')} className="btn btn-lg bg-blue mb-3">Add New Item</button>
+        <Container className='mt-3 mb-5'>
+            <div className='d-flex justify-content-between align-items-center mb-3'>
+                <div className='d-flex align-items-center'>
+                    <span className='fw-bold'>Show Products Per Page: </span>
+                    <select onChange={handlePageProductShowChange} style={{ width: "80px" }} className="form-select ms-2">
+                        <option value="7">7</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                <button onClick={() => navigate('/add-inventory')} className="btn bg-blue">Add New Item</button>
+            </div>
             <Row>
                 <Col md={12}>
                     <Table className='inventory-table' responsive bordered >
@@ -54,6 +94,7 @@ const ManageInventory = () => {
                         <tbody>
 
                             {
+
                                 products.map(product => <tr key={product._id}>
                                     <td><img src={product?.img} style={{ width: "50px", height: "42px" }} alt="" /></td>
                                     <td>{product?.name}</td>
@@ -71,7 +112,15 @@ const ManageInventory = () => {
 
                         </tbody>
                     </Table>
+                    <div className='d-flex justify-content-end'>
+                        {
+                            [...Array(pageCount).keys()].map(number => <button key={number} onClick={() => setPageNumber(number)}
+                                className={pageNumber === number ? 'bg-blue paginate-btn' : 'paginate-btn'}>
 
+                                {number + 1}
+                            </button>)
+                        }
+                    </div>
                 </Col>
             </Row>
         </Container>
