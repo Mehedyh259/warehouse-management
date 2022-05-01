@@ -28,6 +28,7 @@ const AddInventory = () => {
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Product Added Successfully!");
+                    event.target.reset()
                 }
             })
     }

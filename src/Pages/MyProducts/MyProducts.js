@@ -16,22 +16,22 @@ const MyProducts = () => {
 
     useEffect(() => {
         const getProducts = async () => {
+            const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
             try {
 
-                const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
                 const { data } = await axios.get(url, {
                     headers: {
-                        authorization: localStorage.getItem('accessToken')
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
                 });
                 setProducts(data);
-            } catch (err) {
-                const status = err.response.status;
+            } catch (error) {
+                const status = error.response.status;
                 if (status === 401 || status === 403) {
                     signOut(auth);
                     navigate('/login');
-                    localStorage.removeItem('accessToken')
-                    toast.error(err.response?.data?.message);
+                    toast.error(error.response?.data?.message);
+                    localStorage.removeItem('accessToken');
                 }
             }
         }
