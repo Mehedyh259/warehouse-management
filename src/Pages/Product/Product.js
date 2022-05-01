@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Product = () => {
     const [product, setProduct] = useState([]);
+    const navigate = useNavigate()
     const { id } = useParams();
 
     useEffect(() => {
@@ -62,9 +63,13 @@ const Product = () => {
                     </Card>
                 </Col>
                 <Col lg={6} md={6} sm={10} className="mx-auto my-2">
+                    <div className="text-center my-3">
+                        <button onClick={() => navigate('/manage-inventory')} className="btn btn-lg w-50 btn-outline-dark hover-blue">
+                            Manage Inventories
+                        </button>
+                    </div>
                     <Card className='p-3 rounded shadow'>
                         <h2 className='title-color fw-bold text-center'>Restock The Item</h2>
-
                         <Form onSubmit={handleAddQuantity} >
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Add Quantity</Form.Label>

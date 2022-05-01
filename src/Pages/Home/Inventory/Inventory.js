@@ -20,7 +20,7 @@ const Inventory = () => {
             <h2 className='fw-bold title-color text-center mb-3'>Medicine Inventory</h2>
             <Row>
                 {
-                    products.map((product) => <SingleProduct
+                    products?.map((product) => <SingleProduct
                         key={product._id}
                         product={product}
                     />)

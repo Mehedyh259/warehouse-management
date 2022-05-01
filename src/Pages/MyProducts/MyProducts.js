@@ -1,26 +1,45 @@
-import { async } from '@firebase/util';
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 
 const MyProducts = () => {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
+        if (user.email) {
+            const getProducts = async () => {
 
-        const getProducts = async () => {
-            const { data } = await axios.get(`http://localhost:5000/product?email=${user.email}`);
-            setProducts(data);
+                try {
+                    const url = `http://localhost:5000/product?email=${user.email}`;
+                    const { data } = await axios.get(url, {
+                        headers: {
+                            authorization: localStorage.getItem('accessToken')
+                        }
+                    });
+                    setProducts(data);
+                } catch (err) {
+                    const status = err.response.status;
+                    if (status === 401 || status === 403) {
+                        signOut(auth);
+                        navigate('/login');
+                        localStorage.removeItem('accessToken')
+                        toast.error(err.response?.data?.message);
+                    }
+                }
+            }
+            getProducts();
         }
-        getProducts();
-
     }, [user.email]);
+
     if (loading) {
         return <Loading />
     }
