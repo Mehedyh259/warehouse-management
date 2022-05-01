@@ -11,6 +11,7 @@ const Home = () => {
             <Inventory />
             <NewsLetter />
             <ContactUs />
+
         </div>
     );
 };

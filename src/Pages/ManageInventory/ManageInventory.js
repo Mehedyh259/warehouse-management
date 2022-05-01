@@ -11,7 +11,7 @@ const ManageInventory = () => {
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get("http://localhost:5000/products");
+            const { data } = await axios.get("https://tranquil-island-04777.herokuapp.com/products");
             setProducts(data);
         }
         getProducts();
@@ -24,7 +24,7 @@ const ManageInventory = () => {
             const newProducts = products.filter((product) => product._id !== id);
             setProducts(newProducts);
 
-            axios.delete(`http://localhost:5000/product/${id}`)
+            axios.delete(`https://tranquil-island-04777.herokuapp.com/product/${id}`)
                 .then(res => {
                     if (res.status === 200) {
                         toast.success("Product Deleted Successfully");

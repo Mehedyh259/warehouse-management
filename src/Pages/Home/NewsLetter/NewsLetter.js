@@ -10,9 +10,9 @@ const NewsLetter = () => {
                         <div className="newsletter py-5 text-center">
                             <h2>Subscribe To Our Newsletter</h2>
                             <div className="input-group">
-                                <input type="email" class="form-control" placeholder="Enter your email" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">Submit Newsletter</button>
+                                <input type="email" className="form-control" placeholder="Enter your email" />
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary" type="button">Submit Newsletter</button>
                                 </div>
                             </div>
                         </div>

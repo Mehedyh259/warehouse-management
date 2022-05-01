@@ -11,7 +11,7 @@ const Product = () => {
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get(`http://localhost:5000/product/${id}`);
+            const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/product/${id}`);
             setProduct(data);
         }
         getProducts();
@@ -22,7 +22,7 @@ const Product = () => {
         const newQuantity = Number(product.quantity) - 1;
         const newProduct = { ...product, quantity: newQuantity }
         setProduct(newProduct);
-        axios.put(`http://localhost:5000/product/${id}`, { quantity: newQuantity })
+        axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, { quantity: newQuantity })
     }
     const handleAddQuantity = (event) => {
         event.preventDefault();
@@ -30,7 +30,7 @@ const Product = () => {
         const newQuantity = Number(product.quantity) + addedQuantity;
         const newProduct = { ...product, quantity: newQuantity }
         setProduct(newProduct);
-        axios.put(`http://localhost:5000/product/${id}`, { quantity: newQuantity })
+        axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, { quantity: newQuantity })
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Quantity Added Successfully");

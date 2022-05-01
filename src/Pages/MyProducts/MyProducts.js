@@ -19,7 +19,7 @@ const MyProducts = () => {
             const getProducts = async () => {
 
                 try {
-                    const url = `http://localhost:5000/product?email=${user.email}`;
+                    const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
                     const { data } = await axios.get(url, {
                         headers: {
                             authorization: localStorage.getItem('accessToken')
@@ -53,7 +53,7 @@ const MyProducts = () => {
             const newProducts = products.filter((product) => product._id !== id);
             setProducts(newProducts);
 
-            axios.delete(`http://localhost:5000/product/${id}`)
+            axios.delete(`https://tranquil-island-04777.herokuapp.com/product/${id}`)
                 .then(res => {
                     if (res.status === 200) {
                         toast.success("Product Deleted Successfully");

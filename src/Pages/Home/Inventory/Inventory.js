@@ -9,7 +9,7 @@ const Inventory = () => {
     const navigate = useNavigate();
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get("http://localhost:5000/products?limit=6");
+            const { data } = await axios.get("https://tranquil-island-04777.herokuapp.com/products?limit=6");
             setProducts(data);
         }
         getProducts();

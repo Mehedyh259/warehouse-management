@@ -24,7 +24,7 @@ const AddInventory = () => {
 
         // creating new product object to post
         const newProduct = { name, email: user.email, img, description, price, quantity, sold: "0", supplier };
-        axios.post("http://localhost:5000/product", newProduct)
+        axios.post("https://tranquil-island-04777.herokuapp.com/product", newProduct)
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Product Added Successfully!");
