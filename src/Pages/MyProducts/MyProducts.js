@@ -15,36 +15,38 @@ const MyProducts = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        const getProducts = async () => {
-            const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
-            try {
-
-                const { data } = await axios.get(url, {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                    }
-                });
-                setProducts(data);
-            } catch (error) {
-                const status = error.response.status;
-                if (status === 401 || status === 403) {
-                    signOut(auth);
-                    navigate('/login');
-                    toast.error(error.response?.data?.message);
-                    localStorage.removeItem('accessToken');
-                }
-            }
+        if (user) {
+            getProducts(user);
         }
-        getProducts();
-    }, [user.email]);
+    }, [user]);
+
 
     if (loading) {
         return <Loading />
     }
 
+    const getProducts = async (user) => {
 
+        // const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
+        const url = `http://localhost:5000/product?email=${user.email}`;
 
-
+        try {
+            const { data } = await axios.get(url, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            setProducts(data);
+        } catch (error) {
+            const status = error.response.status;
+            if (status === 401 || status === 403) {
+                signOut(auth);
+                navigate('/login');
+                toast.error(error.response?.data?.message);
+                localStorage.removeItem('accessToken');
+            }
+        }
+    }
 
 
     const handleInventoryDelete = (id) => {
