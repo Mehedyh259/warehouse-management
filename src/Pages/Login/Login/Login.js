@@ -24,11 +24,13 @@ const Login = () => {
     const setAccessToken = async () => {
         const email = user?.user?.email;
 
-        toast.success("Logged In successfully")
-        const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
+        if (email) {
+            toast.success("Logged In successfully")
+            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
 
-        localStorage.setItem('accessToken', data.accessToken);
-        navigate(from, { replace: true });
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate(from, { replace: true });
+        }
 
     }
 
