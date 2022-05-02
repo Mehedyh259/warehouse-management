@@ -15,37 +15,40 @@ const MyProducts = () => {
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
-        if (user) {
-            getProducts(user);
+        if (user?.email) {
+            const email = user.email;
+            const getProducts = async () => {
+                const accessToken = localStorage.getItem('accessToken');
+                if (accessToken && email) {
+                    const url = `https://tranquil-island-04777.herokuapp.com/product?email=${email}`;
+                    try {
+                        const { data } = await axios.get(url, {
+                            headers: {
+                                authorization: `Bearer ${accessToken}`
+                            }
+                        });
+                        setProducts(data);
+                    } catch (error) {
+                        console.log(error);
+                        const status = error.response.status;
+                        if (status === 401 || status === 403) {
+                            signOut(auth);
+                            navigate('/login');
+                            toast.error(error.response?.data?.message);
+                            localStorage.removeItem('accessToken');
+                        }
+                    }
+                }
+
+            }
+            getProducts();
         }
-    }, [user]);
+    }, [user?.email]);
+
 
 
     if (loading) {
         return <Loading />
-    }
-
-    const getProducts = async (user) => {
-
-        // const url = `https://tranquil-island-04777.herokuapp.com/product?email=${user.email}`;
-        const url = `http://localhost:5000/product?email=${user.email}`;
-
-        try {
-            const { data } = await axios.get(url, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
-            setProducts(data);
-        } catch (error) {
-            const status = error.response.status;
-            if (status === 401 || status === 403) {
-                signOut(auth);
-                navigate('/login');
-                toast.error(error.response?.data?.message);
-                localStorage.removeItem('accessToken');
-            }
-        }
     }
 
 

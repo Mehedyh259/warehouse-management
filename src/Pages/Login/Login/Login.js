@@ -25,10 +25,11 @@ const Login = () => {
         const email = user?.user?.email;
 
         toast.success("Logged In successfully")
-        navigate(from, { replace: true });
         const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
 
         localStorage.setItem('accessToken', data.accessToken);
+        navigate(from, { replace: true });
+
     }
 
     const handleSubmit = async (event) => {
