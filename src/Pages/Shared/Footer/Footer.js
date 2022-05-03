@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import logo from '../../../images/mediqas-white.jpg';
+import logo from '../../../images/mediqas.png';
+import './Footer.css'
 
 const Footer = () => {
     return (
@@ -10,7 +11,9 @@ const Footer = () => {
             <Container>
                 <Row>
                     <Col className='mt-3' md={6} lg={3} sm={10}>
-                        <img src={logo} height={50} alt="" />
+                        <div className="logo-container d-flex justify-content-center align-items-center">
+                            <img src={logo} width={220} alt="" />
+                        </div>
 
                     </Col>
                     <Col className='mt-3' md={6} lg={3} sm={10}>
