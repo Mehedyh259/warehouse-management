@@ -14,3 +14,7 @@
   background-color: #15237e !important;
   color: #fff !important;
 }
+
+.min-height {
+  min-height: 52vh;
+}

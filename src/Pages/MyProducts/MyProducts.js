@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
+import './MyProducts.css'
 
 const MyProducts = () => {
     const [products, setProducts] = useState([]);
@@ -69,7 +70,7 @@ const MyProducts = () => {
         }
     }
     return (
-        <Container className='my-4'>
+        <Container className='my-4 min-height'>
             <h1 className="title-color fw-bold mb-3 text-center">My Products</h1>
             <Row>
                 <Col md={12}>

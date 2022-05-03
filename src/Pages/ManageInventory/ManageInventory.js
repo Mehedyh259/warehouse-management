@@ -64,7 +64,7 @@ const ManageInventory = () => {
 
 
     return (
-        <Container className='mt-3 mb-5'>
+        <Container className='mt-3 mb-5 min-height'>
             <div className='d-flex justify-content-between align-items-center mb-3'>
                 <div className='d-flex align-items-center'>
                     <span className='fw-bold'>Show Products Per Page: </span>

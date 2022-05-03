@@ -1,12 +1,16 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Form, Row, Button, FloatingLabel } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
+import AOS from 'aos';
 
 const AddInventory = () => {
+    useEffect(() => {
+        AOS.init();
+    }, [])
     const [user, loading] = useAuthState(auth);
 
     if (loading) {
@@ -35,7 +39,7 @@ const AddInventory = () => {
     return (
         <Container className='my-5'>
             <Row>
-                <Col lg={6} md={8} sm={10} className="mx-auto shadow rounded p-3">
+                <Col data-aos="zoom-in-down" data-aos-duration="1500" lg={6} md={8} sm={10} className="mx-auto shadow rounded p-3">
                     <h2 className='title-color fw-bold text-center mb-2'>Add New Product</h2>
 
                     <Form onSubmit={handleAddProduct} >
