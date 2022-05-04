@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ import './Login.css'
 
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
     let errorMessage = "";
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,32 +24,36 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const setAccessToken = async () => {
-        const email = user?.user?.email;
-
-        if (email) {
-            toast.success("Logged In successfully")
-            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
-
-            localStorage.setItem('accessToken', data.accessToken);
-            navigate(from, { replace: true });
-        }
-
-    }
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-        await signInWithEmailAndPassword(email, password);
-    }
-    if (loading) {
+    if (loading || isLoading) {
         return <Loading />
     }
     if (error) {
         errorMessage = <p className="text-danger">{error?.message}</p>;
     }
 
+    const setAccessToken = async () => {
+        const email = user?.user?.email;
+
+        if (email) {
+            setIsLoading(true);
+            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
+
+            localStorage.setItem('accessToken', data.accessToken);
+            setIsLoading(false);
+            navigate(from, { replace: true });
+            toast.success("Logged In successfully");
+        }
+
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        await signInWithEmailAndPassword(email, password);
+        setIsLoading(false);
+    }
     if (user) {
         setAccessToken();
     }

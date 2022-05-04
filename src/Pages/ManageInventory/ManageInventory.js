@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loading from '../Shared/Loading/Loading';
 import './ManageInventory.css'
 
 const ManageInventory = () => {
+    const [isLoading, setIsLoading] = useState(false);
     // for counting how many page will be there
     const [pageCount, setPageCount] = useState(0);
     // this if for current page number
     const [pageNumber, setPageNumber] = useState(0);
-    // this is for product limit
+    // this is for product limit default is 7
     const [productLimit, setProductLimit] = useState(7);
 
     const navigate = useNavigate();
@@ -30,13 +32,19 @@ const ManageInventory = () => {
 
     // get products according to page number
     useEffect(() => {
+        setIsLoading(true);
         const getProducts = async () => {
             // const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
             const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
             setProducts(data);
+            setIsLoading(false);
         }
         getProducts();
     }, [pageNumber, productLimit]);
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     // changes to products count per page
     const handlePageProductShowChange = (event) => {

@@ -10,6 +10,7 @@ import Loading from '../Shared/Loading/Loading';
 import './MyProducts.css'
 
 const MyProducts = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
 
@@ -17,10 +18,12 @@ const MyProducts = () => {
 
     useEffect(() => {
         if (user?.email) {
+            setIsLoading(true);
             const email = user.email;
             const getProducts = async () => {
                 const accessToken = localStorage.getItem('accessToken');
                 if (accessToken && email) {
+
                     const url = `https://tranquil-island-04777.herokuapp.com/product?email=${email}`;
                     try {
                         const { data } = await axios.get(url, {
@@ -29,7 +32,9 @@ const MyProducts = () => {
                             }
                         });
                         setProducts(data);
+                        setIsLoading(false);
                     } catch (error) {
+                        setIsLoading(false);
                         console.log(error);
                         const status = error.response.status;
                         if (status === 401 || status === 403) {
@@ -48,7 +53,7 @@ const MyProducts = () => {
 
 
 
-    if (loading) {
+    if (loading || isLoading) {
         return <Loading />
     }
 

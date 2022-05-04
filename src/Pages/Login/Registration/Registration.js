@@ -1,7 +1,9 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -9,6 +11,7 @@ import './Registration.css'
 
 
 const Registration = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [
         createUserWithEmailAndPassword,
@@ -21,8 +24,21 @@ const Registration = () => {
     if (error || updateError) {
         errorMessage = <p className="text-danger">{error?.message || updateError?.message}</p>;
     }
-    if (loading || updating) {
-        return <Loading />
+
+
+    const setAccessToken = async (user) => {
+        const email = user?.user?.email;
+
+        if (email) {
+            setIsLoading(true);
+            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
+
+            localStorage.setItem('accessToken', data.accessToken);
+            setIsLoading(false);
+            navigate('/');
+            toast.success("Registration Successfully");
+        }
+
     }
 
 
@@ -35,12 +51,16 @@ const Registration = () => {
 
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
+
+    }
+    if (user) {
+        setAccessToken(user);
     }
 
-    if (user) {
-        console.log(user);
-        navigate('/');
+    if (loading || updating || isLoading) {
+        return <Loading />
     }
+
     return (
         <div className="register-section">
             <Container className='py-5'>

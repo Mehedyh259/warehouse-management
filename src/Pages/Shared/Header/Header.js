@@ -24,6 +24,7 @@ const Header = () => {
         }
     }, [user])
 
+
     return (
         <>
             <Navbar collapseOnSelect expand="lg" sticky='top' bg="light" variant="light shadow">

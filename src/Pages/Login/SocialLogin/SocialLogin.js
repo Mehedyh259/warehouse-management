@@ -6,9 +6,11 @@ import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useState } from 'react';
 
 
 const SocialLogin = () => {
+    const [isLoading, setIsLoading] = useState(false)
     let errorMessage;
     const navigate = useNavigate();
     const location = useLocation();
@@ -16,24 +18,25 @@ const SocialLogin = () => {
 
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-    const handleSignInWithGoogle = () => {
+    const handleSignInWithGoogle = async () => {
         errorMessage = "";
-        signInWithGoogle();
+        await signInWithGoogle();
     }
     const setAccessToken = async () => {
         const email = user?.user?.email;
 
         if (email) {
-            toast.success("Logged In successfully")
+            setIsLoading(true)
             const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
-
             localStorage.setItem('accessToken', data.accessToken);
+            setIsLoading(false);
             navigate(from, { replace: true });
+            toast.success("Logged In successfully")
         }
 
     }
 
-    if (loading) {
+    if (loading || isLoading) {
         return <Loading />
     }
     if (error) {
