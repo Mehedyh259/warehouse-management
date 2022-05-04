@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './CounterUp.css'
 import { BsCart4, } from 'react-icons/bs'
 import { FiThumbsUp } from 'react-icons/fi'
 import { FaUsers, FaUserAlt } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
-import AOS from 'aos';
+
 
 
 
 
 const CounterUp = () => {
-    useEffect(() => {
-        AOS.init();
-    }, [])
+
     return (
-        <div className='counter-section'>
+        <div className='counter-section my-5'>
             <div className="container py-5">
                 <div className="row counter-content my-5">
-                    <div data-aos="fade-right" data-aos-duration="1500" className="four col-md-3 my-2" >
+                    <div data-aos="zoom-in" data-aos-duration="1500" className="four col-md-3 my-2" >
                         <div className="counter-box bg-blue">
                             <i><FiThumbsUp /></i>
                             <span className="counter text-white">
@@ -63,7 +61,7 @@ const CounterUp = () => {
                             <p>Available Products</p>
                         </div>
                     </div>
-                    <div data-aos="fade-left" data-aos-duration="1500" className="four col-md-3 my-2">
+                    <div data-aos="zoom-in" data-aos-duration="1500" className="four col-md-3 my-2">
                         <div className="counter-box">
                             <i><FaUserAlt /></i>
                             <span className="counter">

@@ -1,11 +1,9 @@
-import AOS from 'aos';
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import './HeroSection.css';
 
 const HeroSection = () => {
-    useEffect(() => {
-        AOS.init();
-    }, [])
+
     return (
         <div className="banner-area">
             <div data-aos="fade-up" data-aos-duration="1500" className="banner-text">

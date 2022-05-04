@@ -17,6 +17,7 @@ import Product from './Pages/Product/Product';
 import Footer from './Pages/Shared/Footer/Footer';
 import Header from './Pages/Shared/Header/Header';
 import NotFound from './Pages/Shared/NotFound/NotFound';
+import About from './Pages/About/About';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/blog' element={<Blog />} />
+        <Route path='/about' element={<About />} />
         <Route path='/add-inventory' element={
           <AuthRequire>
             <AddInventory />

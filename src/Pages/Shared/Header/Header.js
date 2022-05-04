@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../images/mediqas.png';
 import './Header.css';
@@ -11,12 +11,18 @@ import auth from '../../../firebase.init';
 
 
 const Header = () => {
+    const [userName, setUserName] = useState('User');
 
     const [user] = useAuthState(auth);
     const handleSignOut = () => {
         signOut(auth);
         localStorage.removeItem('accessToken')
     }
+    useEffect(() => {
+        if (user?.displayName) {
+            setUserName(user.displayName.split(' ')[0]);
+        }
+    }, [user])
 
     return (
         <>
@@ -34,6 +40,9 @@ const Header = () => {
                             <NavLink className={({ isActive }) =>
                                 isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
                             } to="/blog"> Blog </NavLink>
+                            <NavLink className={({ isActive }) =>
+                                isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
+                            } to="/about"> About </NavLink>
 
                             {
                                 user ?
@@ -47,7 +56,17 @@ const Header = () => {
                                         <NavLink className={({ isActive }) =>
                                             isActive ? "text-dark ms-3 activeNav title-color nav-link" : "text-dark ms-3 nav-link"
                                         } to="/my-products"> My Products </NavLink>
-                                        <button className='btn ms-3 btn-link text-dark text-decoration-none' onClick={handleSignOut}>Sign out</button>
+                                        <Dropdown className='ms-3'>
+                                            <Dropdown.Toggle className="bg-blue" id="dropdown-basic">
+                                                {userName}
+                                            </Dropdown.Toggle>
+
+                                            <Dropdown.Menu className='bg-gray'>
+                                                <Dropdown.Item onClick={handleSignOut}>
+                                                    Sign Out
+                                                </Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </>
                                     :
                                     <>
