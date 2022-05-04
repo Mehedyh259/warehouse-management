@@ -4,6 +4,7 @@ import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
+import './ResetPassword.css';
 
 const ResetPassword = () => {
     let errorMessage = "";
@@ -32,27 +33,29 @@ const ResetPassword = () => {
     }
 
     return (
-        <Container className='my-5'>
-            <Row>
-                <Col lg={6} md={8} sm={10} className="mx-auto shadow rounded p-5">
-                    <h2 className='title-color fw-bold text-center'>Reset Your Password !</h2>
-                    {
-                        errorMessage ? errorMessage : ""
-                    }
-                    <Form onSubmit={handleResetPassword} >
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" placeholder="Enter Email To Reset Password" />
-                        </Form.Group>
+        <div className="reset-section">
+            <Container className='py-5'>
+                <Row>
+                    <Col lg={6} md={8} sm={10} className="mx-auto align-items-center reset-form shadow rounded p-5">
+                        <h2 className='text-primary fw-bold text-center'>Reset Your Password !</h2>
+                        {
+                            errorMessage ? errorMessage : ""
+                        }
+                        <Form onSubmit={handleResetPassword} >
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" name="email" placeholder="Enter Email To Reset Password" />
+                            </Form.Group>
 
-                        <Button className='bg-blue' variant=" d-block w-50 mx-auto mb-2" type="submit">
-                            Reset Password
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
+                            <Button variant="primary d-block w-50 mx-auto mb-2" type="submit">
+                                Reset Password
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
 
-        </Container>
+            </Container>
+        </div>
     );
 };
 

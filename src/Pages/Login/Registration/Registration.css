@@ -1,0 +1,20 @@
+.register-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)), url('../../../images/banner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.register-form {
+    background-color: #000000c4;
+    padding: 40px !important;
+    border-radius: 20px !important;
+    color: #fff;
+}
+
+.register-form input {
+    background: transparent;
+    color: #fff;
+}

@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import axios from 'axios';
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
@@ -8,6 +7,8 @@ import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import './Login.css'
+
 
 const Login = () => {
     let errorMessage = "";
@@ -53,34 +54,37 @@ const Login = () => {
 
 
     return (
-        <Container className='my-5'>
-            <Row>
-                <Col lg={6} md={8} sm={10} className="mx-auto shadow rounded p-3">
-                    <h2 className='title-color fw-bold text-center'>Please Login!</h2>
-                    {
-                        errorMessage ? errorMessage : ""
-                    }
-                    <Form onSubmit={handleSubmit} >
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" placeholder="Enter Email" required />
-                        </Form.Group>
+        <div className="login-section">
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" placeholder="Enter Password" required />
-                        </Form.Group>
-                        <Button className='bg-blue' variant=" d-block w-50 mx-auto mb-2" type="submit">
-                            Login
-                        </Button>
-                    </Form>
-                    <SocialLogin />
+            <Container className='py-5'>
+                <Row>
+                    <Col lg={6} md={8} sm={10} className="mx-auto login-form shadow rounded p-3">
+                        <h2 className='text-primary fw-bold text-center'>Please Login!</h2>
+                        {
+                            errorMessage ? errorMessage : ""
+                        }
+                        <Form onSubmit={handleSubmit} >
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" name="email" placeholder="Enter Email" required />
+                            </Form.Group>
 
-                    <p>Don't have an account? <span style={{ cursor: 'pointer' }} onClick={() => navigate('/register')} className='title-color'>Please Register</span></p>
-                    <p>Forget password? <Link to="/reset-password" className='text-decoration-none title-color'>Reset Password Here.</Link></p>
-                </Col>
-            </Row>
-        </Container>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" name="password" placeholder="Enter Password" required />
+                            </Form.Group>
+                            <Button variant="primary d-block w-50 mx-auto mb-2" type="submit">
+                                Login
+                            </Button>
+                        </Form>
+                        <SocialLogin />
+
+                        <p>Don't have an account? <span style={{ cursor: 'pointer' }} onClick={() => navigate('/register')} className='text-primary'>Please Register</span></p>
+                        <p>Forget password? <Link to="/reset-password" className='text-decoration-none text-primary'>Reset Password Here.</Link></p>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 };
 

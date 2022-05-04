@@ -20,13 +20,15 @@ const CounterUp = () => {
                         <div className="counter-box bg-blue">
                             <i><FiThumbsUp /></i>
                             <span className="counter text-white">
-                                <CountUp end={214} duration={2} >
+                                <CountUp end={214} duration={1.5} >
                                     {({ countUpRef, start }) => (
                                         <VisibilitySensor onChange={start}>
                                             <span ref={countUpRef} />
                                         </VisibilitySensor>
                                     )}
+
                                 </CountUp>
+
                             </span>
                             <p className='text-white'>Available Companies</p>
                         </div>
@@ -35,7 +37,7 @@ const CounterUp = () => {
                         <div className="counter-box">
                             <i><FaUsers /></i>
                             <span className="counter">
-                                <CountUp end={325} duration={2}>
+                                <CountUp end={325} duration={1.5}>
                                     {({ countUpRef, start }) => (
                                         <VisibilitySensor onChange={start}>
                                             <span ref={countUpRef} />
@@ -50,7 +52,7 @@ const CounterUp = () => {
                         <div className="counter-box">
                             <i><BsCart4 /></i>
                             <span className="counter">
-                                <CountUp end={2174} duration={2}>
+                                <CountUp end={2174} duration={1.5}>
                                     {({ countUpRef, start }) => (
                                         <VisibilitySensor onChange={start}>
                                             <span ref={countUpRef} />
@@ -65,7 +67,7 @@ const CounterUp = () => {
                         <div className="counter-box">
                             <i><FaUserAlt /></i>
                             <span className="counter">
-                                <CountUp end={156} duration={2}>
+                                <CountUp end={156} duration={1.5}>
                                     {({ countUpRef, start }) => (
                                         <VisibilitySensor onChange={start}>
                                             <span ref={countUpRef} />
