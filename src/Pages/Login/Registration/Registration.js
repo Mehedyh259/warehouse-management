@@ -27,9 +27,7 @@ const Registration = () => {
 
     const setAccessToken = async (user) => {
         const email = user?.user?.email;
-
         if (email) {
-            toast.success("Registration Successfully");
             const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
             localStorage.setItem('accessToken', data.accessToken);
             navigate('/');

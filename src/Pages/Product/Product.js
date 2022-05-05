@@ -39,7 +39,7 @@ const Product = () => {
         const newProduct = { ...product, quantity: newQuantity }
 
         setProduct(newProduct);
-        axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, { quantity: newQuantity })
+        axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, { quantity: newQuantity, sold: product.sold })
             .then(res => {
                 if (res.status === 200) {
                     toast.success("Quantity Added Successfully");
