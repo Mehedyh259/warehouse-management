@@ -11,7 +11,6 @@ import './Registration.css'
 
 
 const Registration = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [
         createUserWithEmailAndPassword,
@@ -30,13 +29,10 @@ const Registration = () => {
         const email = user?.user?.email;
 
         if (email) {
-            setIsLoading(true);
-            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
-
-            localStorage.setItem('accessToken', data.accessToken);
-            setIsLoading(false);
-            navigate('/');
             toast.success("Registration Successfully");
+            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
+            localStorage.setItem('accessToken', data.accessToken);
+            navigate('/');
         }
 
     }
@@ -57,7 +53,7 @@ const Registration = () => {
         setAccessToken(user);
     }
 
-    if (loading || updating || isLoading) {
+    if (loading || updating) {
         return <Loading />
     }
 
