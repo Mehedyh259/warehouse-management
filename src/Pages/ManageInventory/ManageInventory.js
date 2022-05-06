@@ -34,7 +34,7 @@ const ManageInventory = () => {
     useEffect(() => {
         setIsLoading(true);
         const getProducts = async () => {
-            // const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
+
             const { data } = await axios.get(`https://tranquil-island-04777.herokuapp.com/products?page=${pageNumber}&limit=${productLimit}`);
             setProducts(data);
             setIsLoading(false);

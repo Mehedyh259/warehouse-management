@@ -19,15 +19,17 @@ const Product = () => {
     }, [id]);
 
     const handleDeliver = () => {
-        const newQuantity = Number(product.quantity) - 1;
-        const newSold = Number(product.sold) + 1;
-        const newProduct = { ...product, quantity: newQuantity, sold: newSold };
-        const updateField = {
-            quantity: newQuantity,
-            sold: newSold
+        if (Number(product.quantity) > 0) {
+            const newQuantity = Number(product.quantity) - 1;
+            const newSold = Number(product.sold) + 1;
+            const newProduct = { ...product, quantity: newQuantity, sold: newSold };
+            const updateField = {
+                quantity: newQuantity,
+                sold: newSold
+            }
+            setProduct(newProduct);
+            axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, updateField);
         }
-        setProduct(newProduct);
-        axios.put(`https://tranquil-island-04777.herokuapp.com/product/${id}`, updateField)
     }
 
 
