@@ -77,6 +77,7 @@ const ManageInventory = () => {
                 <div className='d-flex align-items-center'>
                     <span className='fw-bold'>Show Products Per Page: </span>
                     <select onChange={handlePageProductShowChange} style={{ width: "80px" }} className="form-select ms-2">
+                        <option value={productLimit}>{productLimit}</option>
                         <option value="7">7</option>
                         <option value="10">10</option>
                         <option value="15">15</option>
