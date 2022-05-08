@@ -1,4 +1,6 @@
-// git repo link: https://github.com/ProgrammingHeroWC4/warehouse-management-client-side-Mehedyh259
+// git repo link frontend: https://github.com/ProgrammingHeroWC4/warehouse-management-client-side-Mehedyh259
+
+// git repo link for server: https://github.com/ProgrammingHeroWC4/warehouse-management-server-side-Mehedyh259
 
 // firebase live website link: https://medicine-inventory-76ade.web.app/
 

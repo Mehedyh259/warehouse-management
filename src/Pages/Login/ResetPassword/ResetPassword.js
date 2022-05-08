@@ -18,13 +18,15 @@ const ResetPassword = () => {
         event.preventDefault();
         errorMessage = "";
         const email = event.target.email.value;
-        if (!email) {
-            toast.error("Please Enter Your Email First!!!");
-        } else {
+        if (email) {
             await sendPasswordResetEmail(email);
             toast.success("Password Reset Email Sent Successfully!!")
+        } else {
+            toast.error("Please Enter Your Email First!!!");
         }
     }
+
+
     if (sending) {
         return <Loading />
     }

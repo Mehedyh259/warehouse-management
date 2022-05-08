@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
@@ -11,6 +12,7 @@ import './Registration.css'
 
 
 const Registration = () => {
+
     const navigate = useNavigate();
     const [
         createUserWithEmailAndPassword,
@@ -25,17 +27,6 @@ const Registration = () => {
     }
 
 
-    const setAccessToken = async (user) => {
-        const email = user?.user?.email;
-        if (email) {
-            const { data } = await axios.post('https://tranquil-island-04777.herokuapp.com/login', { email });
-            localStorage.setItem('accessToken', data.accessToken);
-            navigate('/');
-        }
-
-    }
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         errorMessage = "";
@@ -45,11 +36,12 @@ const Registration = () => {
 
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
+        signOut(auth);
+        navigate('/login');
+        toast.success("Registration Successfully");
 
     }
-    if (user) {
-        setAccessToken(user);
-    }
+
 
     if (loading || updating) {
         return <Loading />
